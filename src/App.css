@@ -1,9 +1,45 @@
-.chart-container {
+body {
+  background-color: #121213;
+  font-family: "gridlite-pe-variable", sans-serif;
+  font-variation-settings: "ELSH" 3, "RECT" 1, "BACK" 1, "wght" 900;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.layout {
   display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  min-width: 50vw;
-  min-height: 50vh;
+  flex-direction: column;
+}
+
+/* TOGGLE CONTAINER */
+
+.toggle-container {
+  display: flex;
+  justify-content: space-between;
+}
+.arrow-button {
+  display: flex;
+  align-items: center;
+}
+.arrow-button.prev img {
+  margin-right: 10px;
+}
+.arrow-button.next img {
+  margin-left: 10px;
+}
+
+/* CONTENT LAYOUT */
+.content {
+  display: flex;
+  align-items: center;
+}
+
+/* TEXT CONTAINER */
+.text-container {
+  min-width: 300px;
+}
+
+.chart-container {
 }
 .icon {
   width: 30px;
@@ -24,7 +60,6 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-  text-align: center;
 }
 
 .logo {
