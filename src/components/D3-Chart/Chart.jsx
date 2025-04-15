@@ -1,37 +1,17 @@
+/* eslint-disable react/prop-types */
+
 import * as d3 from "d3";
 import { useState } from "react";
+import SatelliteTooltip from "../Satellite-Tooltip/Tooltip";
+import { processSats } from "../../utils/utils";
 
-export default function Chart({ data }) {
-  const marginLeft = 20;
-  const width = 1000;
-  const height = 600;
-  const marginRight = 20;
-  const marginTop = 60;
-  const marginBottom = 20;
-
-  const heightBound = height - marginTop - marginBottom;
-  const widthBound = width - marginLeft - marginRight;
+export default function Chart({ data, margin, height, width }) {
+  const marginLeft = margin.left;
+  const marginRight = margin.right;
+  const marginTop = margin.top;
 
   // Filter and process the data
-  const sats = data
-    .filter((d) => d["year"])
-    .map((d, i) => {
-      let date = new Date(d["Date of Launch"]);
-      return {
-        name: d["Name of Satellite, Alternate Names"],
-        country: d["Country of Operator/Owner"],
-        owner: d["Operator/Owner"],
-        use: d["Users"],
-        purpose: d["Purpose"],
-        contractor: d["Contractor"],
-        country_contractor: d["Country of Contractor"],
-        lifetime: d["Expected Lifetime (yrs.)"],
-        date_launch: date.getFullYear(),
-        year: d["year"],
-      };
-    });
-
-  const test = sats.filter((d) => d.country == "USA");
+  const sats = processSats(data);
   console.log("Satellites: ", sats);
 
   const years = sats.map((d) => d.year);
@@ -150,56 +130,21 @@ export default function Chart({ data }) {
             );
           })}
         </g>
-
-        {/* Tooltip */}
-        {tooltip.show && (
-          <g transform={`translate(${tooltip.x},${tooltip.y})`}>
-            <rect
-              x="10"
-              y="-32"
-              width="150"
-              height="200"
-              fill="white"
-              stroke="black"
-              rx="5"
-              ry="5"
-              pointerEvents="none"
-            />
-            <text x="15" y="-20" fontSize="11px" pointerEvents="none">
-              <tspan x="15" dy="0">
-                Name:
-              </tspan>{" "}
-              <tspan x="15" dy="1.3em">
-                {tooltip.text.name}
-              </tspan>{" "}
-              <tspan x="15" dy="1.4em">
-                Country:
-              </tspan>{" "}
-              <tspan x="15" dy="1.3em">
-                {tooltip.text.country}
-              </tspan>{" "}
-              <tspan x="15" dy="1.4em">
-                Use:
-              </tspan>{" "}
-              <tspan x="15" dy="1.3em">
-                {tooltip.text.use}
-              </tspan>{" "}
-              <tspan x="15" dy="1.4em">
-                Contractor:
-              </tspan>{" "}
-              <tspan x="15" dy="1.3em">
-                {tooltip.text.contractor}
-              </tspan>{" "}
-              <tspan x="15" dy="1.4em">
-                Launched:
-              </tspan>{" "}
-              <tspan x="15" dy="1.3em">
-                {tooltip.text.launched}
-              </tspan>{" "}
-            </text>
-          </g>
-        )}
       </svg>
+      {/* Tooltip */}
+      {tooltip.show && (
+        <SatelliteTooltip
+          x={tooltip.x}
+          y={tooltip.y}
+          text={{
+            name: tooltip.text.name,
+            country: tooltip.text.country,
+            use: tooltip.text.use,
+            contractor: tooltip.text.contractor,
+            launched: tooltip.text.year,
+          }}
+        />
+      )}
     </div>
   );
 }
