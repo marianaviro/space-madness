@@ -57,7 +57,14 @@ function App() {
         </div>
         <div className="chart-container">
           {data ? (
-            <Chart data={data} margin={MARGIN} width={WIDTH} height={HEIGHT} />
+            <DeckCanvasChart
+              data={data}
+              margin={MARGIN}
+              width={WIDTH}
+              height={HEIGHT}
+              iconSize={ICON_SIZE}
+              iconUrl={ICON_URL}
+            />
           ) : (
             // <CanvasChart
             //   data={data}
