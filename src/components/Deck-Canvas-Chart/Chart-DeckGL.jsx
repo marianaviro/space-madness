@@ -17,6 +17,7 @@ export default function DeckCanvasChart({
   iconSize,
   margin,
   iconUrl,
+  step,
 }) {
   // compute positions
   const { sats, x: xScale } = prepareData(
@@ -55,7 +56,16 @@ export default function DeckCanvasChart({
   const layers = [
     makeGridLinesLayer(xScale, height, margin),
     makeGridLabelsLayer(xScale, margin),
-    makeIconLayer(sats, hovered, onHover, iconUrl, iconSize, width, height),
+    makeIconLayer(
+      sats,
+      hovered,
+      onHover,
+      iconUrl,
+      iconSize,
+      width,
+      height,
+      step
+    ),
   ];
 
   // orthographic camera
@@ -83,7 +93,7 @@ export default function DeckCanvasChart({
         onViewStateChange={({ viewState }) => setViewState(viewState)}
         controller
         layers={layers}
-        style={{ backgroundColor: "#111" }}
+        style={{ backgroundColor: "#121213" }}
       />
       {tooltip.text && (
         <SatelliteTooltip x={tooltip.x} y={tooltip.y} text={tooltip.text} />

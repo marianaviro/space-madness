@@ -52,17 +52,39 @@ export const makeIconLayer = (
   iconUrl,
   iconSize,
   width,
-  height
+  height,
+  step
 ) => {
   const ICON_MAPPING = {
-    satellite: {
-      x: 0,
-      y: 0,
-      width: iconSize,
-      height: iconSize,
-      anchorX: iconSize / 2,
-      anchorY: iconSize / 2,
+    "satellite-comm-other": {
+      "x": 1,
+      "y": 1,
+      "width": 24,
+      "height": 24,
+      "anchorY": 24,
     },
+    "satellite-comm": {
+      "x": 27,
+      "y": 1,
+      "width": 24,
+      "height": 24,
+      "anchorY": 24,
+    },
+    "satellite": {
+      "x": 53,
+      "y": 1,
+      "width": 24,
+      "height": 24,
+      "anchorY": 24,
+    },
+    // satellite: {
+    //   x: 0,
+    //   y: 0,
+    //   width: iconSize,
+    //   height: iconSize,
+    //   anchorX: iconSize / 2,
+    //   anchorY: iconSize / 2,
+    // },
   };
 
   return new IconLayer({
@@ -73,12 +95,24 @@ export const makeIconLayer = (
 
     iconAtlas: iconUrl,
     iconMapping: ICON_MAPPING,
-    getIcon: () => "satellite",
+    getIcon: (d) => {
+      if (step === 0) {
+        console.log(d);
+        if (d.year == 1974) return "satellite-comm";
+        else return "satellite";
+      } else if (step === 1) {
+        if (d.use === "Commercial") return "satellite-comm";
+        else if (d.use.includes("Commercial")) return "satellite-comm-other";
+        else return "satellite";
+      } else {
+        return "satellite";
+      }
+    },
     sizeScale: 1,
     getSize: () => iconSize,
 
     // flip Y
-    getPosition: (d) => [d.x, height - d.y],
+    getPosition: (d) => [d.x, d.y + 30],
 
     // fade others out to 10% when one is hovered
     getColor: (d) => {

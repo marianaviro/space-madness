@@ -1,0 +1,36 @@
+{"frames": [
+
+{
+	"filename": "sat-comm-other.svg",
+	"frame": {"x":1,"y":1,"w":24,"h":24},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":24,"h":24},
+	"sourceSize": {"w":24,"h":24}
+},
+{
+	"filename": "sat-comm.svg",
+	"frame": {"x":27,"y":1,"w":24,"h":24},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":24,"h":24},
+	"sourceSize": {"w":24,"h":24}
+},
+{
+	"filename": "sat.svg",
+	"frame": {"x":53,"y":1,"w":24,"h":24},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":24,"h":24},
+	"sourceSize": {"w":24,"h":24}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "satellite-icon-atlas.png",
+	"format": "RGBA8888",
+	"size": {"w":78,"h":26},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:14ef720f8c8e4f613beb51767c0cda06:3894590af4db1a00757b89ef2bdb2e88:2e5b5d7e020f229cab81e1174f4eacfe$"
+}
+}
