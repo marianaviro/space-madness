@@ -8,9 +8,9 @@ export const DATA_URLS = [
 
 export const STYLES = {
   "width": 2500,
-  "height": 2000,
+  "height": 3000,
   "iconSize": 34,
-  "margin": { top: 40, right: 20, bottom: 20, left: 40 },
+  "margin": { top: 0, right: 0, bottom: 0, left: 0 },
 };
 
 export const ICON_MAPPING = {

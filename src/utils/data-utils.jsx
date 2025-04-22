@@ -2,11 +2,11 @@ import * as d3 from "d3";
 
 import { DATA_URLS } from "./config.jsx";
 
-export const loadData = (chapter, setData) => {
+export const loadData = (chapter, filter, setData) => {
   d3.csv(DATA_URLS[chapter], d3.autoType)
     .then((loadedData) => {
       console.log("Data reloaded:", loadedData);
-      const data = processData(chapter, loadedData);
+      const data = processData(chapter, filter, loadedData);
       setData(data);
     })
     .catch((error) => {
@@ -14,10 +14,18 @@ export const loadData = (chapter, setData) => {
     });
 };
 
-export const processData = (chapter, data) => {
+export const processData = (chapter, filter, data) => {
   // Ch 1: Satellites (SATCAT)
   if (chapter == 0) {
-    return data.map((d, i) => {
+    let processed = data;
+    if (filter) {
+      if (filter == "decayed") {
+        processed = data.filter((d) => !d["DECAY_DATE"]);
+        console.log("Filtered in: ", processed.length);
+      }
+    }
+
+    return processed.map((d, i) => {
       let launch_date = new Date(d["LAUNCH_DATE"]);
       let decay_date = new Date(d["DECAY_DATE"]);
       return {

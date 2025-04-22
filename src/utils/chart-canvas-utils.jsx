@@ -3,9 +3,10 @@ import { STYLES } from "./config.jsx";
 
 export const prepareData = (slide, data) => {
   let xScale, yScale, positions;
+  let processedData = data;
 
   if (slide.type === "timeline") {
-    const years = Array.from(new Set(data.map((d) => d.year))).sort(
+    const years = Array.from(new Set(processedData.map((d) => d.year))).sort(
       d3.ascending
     );
     xScale = d3
@@ -14,7 +15,7 @@ export const prepareData = (slide, data) => {
       .range([STYLES.margin.left, STYLES.width - STYLES.margin.right]);
 
     // group by year, stagger vertically
-    const grouped = d3.group(data, (d) => d.year);
+    const grouped = d3.group(processedData, (d) => d.year);
     const ySpacing = STYLES.iconSize + 4;
     positions = [];
 
@@ -23,10 +24,11 @@ export const prepareData = (slide, data) => {
       satGroup.forEach((d, i) => {
         const y = STYLES.margin.top + i * ySpacing;
 
-        //TODO: Remove this to really show all satellites
+        //Remove this to show all satellites
         if (y + STYLES.iconSize / 2 < STYLES.height - STYLES.margin.bottom) {
           positions.push({ ...d, x: xPos, y });
         }
+        //Uncomment this to constrain Y boundary
         positions.push({ ...d, x: xPos, y });
       });
     }
@@ -35,7 +37,7 @@ export const prepareData = (slide, data) => {
 
   if (slide.type === "waffle") {
     const numCols = slide.numCols || STYLES.width / 10;
-    const total = data.length;
+    const total = processedData.length;
     const numRows = Math.ceil(total / numCols);
 
     xScale = d3
@@ -48,9 +50,9 @@ export const prepareData = (slide, data) => {
       .scaleBand()
       .domain(d3.range(numRows))
       .range([STYLES.margin.top, STYLES.height - STYLES.margin.bottom])
-      .padding(10);
+      .padding(0.1);
 
-    positions = data.map((d, i) => {
+    positions = processedData.map((d, i) => {
       const col = i % numCols;
       const row = Math.floor(i / numCols);
       return {

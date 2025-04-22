@@ -48,8 +48,8 @@ export default function DeckCanvasChart({ slide, data }) {
       }}
     >
       <DeckGL
-        width={STYLES.width}
-        height={STYLES.height}
+        width="100%"
+        height="100%"
         views={[
           new OrthographicView({
             id: "ortho",

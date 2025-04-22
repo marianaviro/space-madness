@@ -16,13 +16,14 @@ export const satCatOptions = (positions, slide, hovered, onHover) => {
     sizeScale: 0.5,
     getSize: () => STYLES.iconSize,
 
-    getPosition: (d) => [d.x, d.y + 30],
+    // getPosition: (d) => [d.x, d.y + 30],
+    getPosition: (d) => [d.x, d.y],
 
     getColor: (d) => {
       if (!hovered) {
         return [200, 200, 200, 255];
       }
-      return d.id === hovered.id ? [255, 200, 200, 255] : [200, 200, 200, 25];
+      return d.id === hovered.id ? [255, 200, 200, 255] : [200, 200, 200, 128];
     },
     updateTriggers: {
       getColor: [hovered],
@@ -49,9 +50,12 @@ export const satUseOptions = (positions, slide, hovered, onHover) => {
         if (d.use == "Commercial") return "sat-comm";
         else if (d.use.includes("Commercial")) return "sat-comm-other";
         else return "satellite";
+      } else if (slide.step == 2) {
+        if (d.name.includes("Starlink")) return "starlink";
+        else return "satellite";
       }
     },
-    sizeScale: 0.5,
+    sizeScale: 0.8,
     getSize: () => STYLES.iconSize,
 
     getPosition: (d) => [d.x, d.y + 30],
@@ -88,6 +92,8 @@ export const spaceRidesOptions = (positions, slide, hovered, onHover) => {
         } else {
           return "space-rider";
         }
+      } else {
+        return "space-rider";
       }
     },
     sizeScale: 0.8,
