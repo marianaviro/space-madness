@@ -1,20 +1,35 @@
 import * as d3 from "d3";
-import { processSats } from "./utils";
+import { STYLES } from "./config.jsx";
 
-export const prepareData = (data, margin, width, height, iconSize) => {
-  const sats = processSats(data);
+export const prepareData = (slide, data) => {
+  let x;
+  let y;
+  if (slide.type == "timeline") {
+    // Extract unique years and define xScale
+    const years = Array.from(new Set(data.map((d) => d.year))).sort(
+      d3.ascending
+    );
+    x = d3
+      .scaleLinear()
+      .domain(d3.extent(years))
+      .range([STYLES.margin.left, STYLES.width - STYLES.margin.right]);
+  } else if (slide.type == "waffle") {
+    const numCols = 10;
+    const total = data.length;
+    const numRows = Math.ceil(total / numCols);
+    x = d3
+      .scaleBand()
+      .domain(d3.range(numCols))
+      .range([STYLES.margin.left, STYLES.width - STYLES.margin.right]);
+    y = d3
+      .scaleBand()
+      .domain(d3.range(numRows))
+      .range([STYLES.margin.top, STYLES.height - STYLES.margin.bottom]);
+  }
 
-  // Extract unique years and define xScale
-  const years = Array.from(new Set(sats.map((d) => d.year))).sort(d3.ascending);
+  const grouped = d3.group(data, (d) => d.year);
 
-  const x = d3
-    .scaleLinear()
-    .domain(d3.extent(years))
-    .range([margin.left, width - margin.right]);
-
-  const grouped = d3.group(sats, (d) => d.year);
-
-  const ySpacing = iconSize + 4;
+  const ySpacing = STYLES.iconSize + 4;
 
   // Position each satellite
   const positioned = [];
@@ -22,16 +37,17 @@ export const prepareData = (data, margin, width, height, iconSize) => {
     const xPos = x(year);
     satGroup.forEach((d, i) => {
       d.x = xPos;
-      d.y = margin.top + i * ySpacing;
+      //change when y is different
+      d.y = STYLES.margin.top + i * ySpacing;
 
       // Prevent from going beyond chart bounds
-      if (d.y + iconSize / 2 < height - margin.bottom) {
+      if (d.y + STYLES.iconSize / 2 < STYLES.height - STYLES.margin.bottom) {
         positioned.push(d);
       }
     });
   }
 
-  return { sats: positioned, x };
+  return { positions: positioned, x };
 };
 
 // Load image once

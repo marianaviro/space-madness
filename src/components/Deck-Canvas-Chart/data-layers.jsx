@@ -1,6 +1,39 @@
 import { PathLayer, TextLayer, IconLayer } from "@deck.gl/layers";
 import { PathStyleExtension } from "@deck.gl/extensions";
 import { COORDINATE_SYSTEM } from "@deck.gl/core";
+import {
+  satCatOptions,
+  satUseOptions,
+  spaceRidesOptions,
+} from "../../utils/icon-utils.jsx";
+
+export const createLayers = (
+  positions,
+  slide,
+  hovered,
+  onHover,
+  xScale,
+  yScale
+) => {
+  if (slide.chapter == 0)
+    return createSatCatLayers(positions, slide, hovered, onHover);
+  else if (slide.chapter == 1)
+    return createSatUseLayers(positions, slide, hovered, onHover);
+  else if (slide.chapter == 2)
+    return createSpaceRidesLayers(positions, slide, hovered, onHover);
+};
+
+export const createSatCatLayers = (positions, slide, hovered, onHover) => {
+  return [new IconLayer(satCatOptions(positions, slide, hovered, onHover))];
+};
+
+export const createSatUseLayers = (positions, slide, hovered, onHover) => {
+  return [new IconLayer(satUseOptions(positions, slide, hovered, onHover))];
+};
+
+export const createSpaceRidesLayers = (positions, slide, hovered, onHover) => {
+  return [new IconLayer(spaceRidesOptions(positions, slide, hovered, onHover))];
+};
 
 export const makeGridLinesLayer = (xScale, height, margin) => {
   const ticks = xScale.ticks(10);
@@ -42,89 +75,5 @@ export const makeGridLabelsLayer = (xScale, margin) => {
     getAlignmentBaseline: "bottom",
     getColor: [255, 255, 255],
     coordinateSystem: COORDINATE_SYSTEM.CARTESIAN,
-  });
-};
-
-export const makeIconLayer = (
-  sats,
-  hovered,
-  onHover,
-  iconUrl,
-  iconSize,
-  width,
-  height,
-  step
-) => {
-  const ICON_MAPPING = {
-    "satellite-comm-other": {
-      "x": 1,
-      "y": 1,
-      "width": 24,
-      "height": 24,
-      "anchorY": 24,
-    },
-    "satellite-comm": {
-      "x": 27,
-      "y": 1,
-      "width": 24,
-      "height": 24,
-      "anchorY": 24,
-    },
-    "satellite": {
-      "x": 53,
-      "y": 1,
-      "width": 24,
-      "height": 24,
-      "anchorY": 24,
-    },
-    // satellite: {
-    //   x: 0,
-    //   y: 0,
-    //   width: iconSize,
-    //   height: iconSize,
-    //   anchorX: iconSize / 2,
-    //   anchorY: iconSize / 2,
-    // },
-  };
-
-  return new IconLayer({
-    id: "sat-icons",
-    data: sats,
-    pickable: true,
-    coordinateSystem: COORDINATE_SYSTEM.CARTESIAN,
-
-    iconAtlas: iconUrl,
-    iconMapping: ICON_MAPPING,
-    getIcon: (d) => {
-      if (step === 0) {
-        console.log(d);
-        if (d.year == 1974) return "satellite-comm";
-        else return "satellite";
-      } else if (step === 1) {
-        if (d.use === "Commercial") return "satellite-comm";
-        else if (d.use.includes("Commercial")) return "satellite-comm-other";
-        else return "satellite";
-      } else {
-        return "satellite";
-      }
-    },
-    sizeScale: 1,
-    getSize: () => iconSize,
-
-    // flip Y
-    getPosition: (d) => [d.x, d.y + 30],
-
-    // fade others out to 10% when one is hovered
-    getColor: (d) => {
-      if (!hovered) {
-        return [200, 200, 200, 255];
-      }
-      return d.name === hovered.name ? [255, 140, 0, 255] : [200, 200, 200, 25];
-    },
-    updateTriggers: {
-      getColor: [hovered],
-    },
-
-    onHover,
   });
 };
