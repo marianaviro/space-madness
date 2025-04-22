@@ -2,7 +2,7 @@
 
 {
 	"filename": "ride.svg",
-	"frame": {"x":105,"y":1,"w":20,"h":24},
+	"frame": {"x":137,"y":1,"w":20,"h":24},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":2,"y":0,"w":20,"h":24},
@@ -10,31 +10,47 @@
 },
 {
 	"filename": "sat-comm-other.svg",
-	"frame": {"x":1,"y":1,"w":24,"h":24},
+	"frame": {"x":1,"y":1,"w":34,"h":26},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":24,"h":24},
-	"sourceSize": {"w":24,"h":24}
+	"spriteSourceSize": {"x":0,"y":0,"w":34,"h":26},
+	"sourceSize": {"w":34,"h":26}
 },
 {
 	"filename": "sat-comm.svg",
-	"frame": {"x":27,"y":1,"w":24,"h":24},
+	"frame": {"x":37,"y":1,"w":34,"h":26},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":24,"h":24},
-	"sourceSize": {"w":24,"h":24}
+	"spriteSourceSize": {"x":0,"y":0,"w":34,"h":26},
+	"sourceSize": {"w":34,"h":26}
 },
 {
 	"filename": "sat.svg",
-	"frame": {"x":53,"y":1,"w":24,"h":24},
+	"frame": {"x":73,"y":1,"w":34,"h":26},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":24,"h":24},
-	"sourceSize": {"w":24,"h":24}
+	"spriteSourceSize": {"x":0,"y":0,"w":34,"h":26},
+	"sourceSize": {"w":34,"h":26}
+},
+{
+	"filename": "space-rider-private.svg",
+	"frame": {"x":159,"y":1,"w":13,"h":24},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":13,"h":24},
+	"sourceSize": {"w":13,"h":24}
+},
+{
+	"filename": "space-rider-tourist.svg",
+	"frame": {"x":174,"y":1,"w":13,"h":24},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":13,"h":24},
+	"sourceSize": {"w":13,"h":24}
 },
 {
 	"filename": "space-rider.svg",
-	"frame": {"x":127,"y":1,"w":13,"h":24},
+	"frame": {"x":189,"y":1,"w":13,"h":24},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":13,"h":24},
@@ -42,19 +58,19 @@
 },
 {
 	"filename": "starlink.svg",
-	"frame": {"x":79,"y":1,"w":24,"h":24},
+	"frame": {"x":109,"y":1,"w":26,"h":26},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":24,"h":24},
-	"sourceSize": {"w":24,"h":24}
+	"spriteSourceSize": {"x":0,"y":0,"w":26,"h":26},
+	"sourceSize": {"w":26,"h":26}
 }],
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
 	"image": "satellite-icon-atlas.png",
 	"format": "RGBA8888",
-	"size": {"w":141,"h":26},
+	"size": {"w":203,"h":28},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:91ac772d1d5fb679194b1b80bb62c120:9cde7cc5da5a141757f4bcd7eaa79f60:2e5b5d7e020f229cab81e1174f4eacfe$"
+	"smartupdate": "$TexturePacker:SmartUpdate:338299aea1fd909f147f5df70426535f:c101bd7c21f922fd6c23337b6840f947:2e5b5d7e020f229cab81e1174f4eacfe$"
 }
 }

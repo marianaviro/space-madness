@@ -6,13 +6,14 @@ export const satCatOptions = (positions, slide, hovered, onHover) => {
     id: slide.id,
     data: positions,
     pickable: true,
+    sizeUnits: "meters",
     coordinateSystem: COORDINATE_SYSTEM.CARTESIAN,
     iconAtlas: ICON_URL,
     iconMapping: ICON_MAPPING,
     getIcon: (d) => {
       return "satellite";
     },
-    sizeScale: 1,
+    sizeScale: 0.5,
     getSize: () => STYLES.iconSize,
 
     getPosition: (d) => [d.x, d.y + 30],
@@ -21,7 +22,7 @@ export const satCatOptions = (positions, slide, hovered, onHover) => {
       if (!hovered) {
         return [200, 200, 200, 255];
       }
-      return d.id === hovered.id ? [255, 140, 0, 255] : [200, 200, 200, 25];
+      return d.id === hovered.id ? [255, 200, 200, 255] : [200, 200, 200, 25];
     },
     updateTriggers: {
       getColor: [hovered],
@@ -35,11 +36,12 @@ export const satUseOptions = (positions, slide, hovered, onHover) => {
     id: slide.id,
     data: positions,
     pickable: true,
+    sizeUnits: "meters",
     coordinateSystem: COORDINATE_SYSTEM.CARTESIAN,
     iconAtlas: ICON_URL,
     iconMapping: ICON_MAPPING,
     getIcon: (d) => {
-      // if (!d.use) console.log(d);
+      if (!d.use) return "";
 
       if (slide.step == 0) {
         return "satellite";
@@ -49,7 +51,7 @@ export const satUseOptions = (positions, slide, hovered, onHover) => {
         else return "satellite";
       }
     },
-    sizeScale: 1,
+    sizeScale: 0.5,
     getSize: () => STYLES.iconSize,
 
     getPosition: (d) => [d.x, d.y + 30],
@@ -72,6 +74,7 @@ export const spaceRidesOptions = (positions, slide, hovered, onHover) => {
     id: slide.id,
     data: positions,
     pickable: true,
+    sizeUnits: "meters",
     coordinateSystem: COORDINATE_SYSTEM.CARTESIAN,
     iconAtlas: ICON_URL,
     iconMapping: ICON_MAPPING,
@@ -79,11 +82,15 @@ export const spaceRidesOptions = (positions, slide, hovered, onHover) => {
       if (slide.step == 0) {
         return "space-rider";
       } else if (slide.step == 1) {
-        if (d.category.includes("P")) return "ride";
-        else return "space-rider";
+        if (d.category.includes("P")) {
+          if (d.category == "PT") return "space-rider-tourist";
+          else return "space-rider-private";
+        } else {
+          return "space-rider";
+        }
       }
     },
-    sizeScale: 1,
+    sizeScale: 0.8,
     getSize: () => STYLES.iconSize,
 
     getPosition: (d) => [d.x, d.y + 30],

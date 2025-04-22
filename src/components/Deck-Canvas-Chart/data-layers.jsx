@@ -5,7 +5,20 @@ import {
   satCatOptions,
   satUseOptions,
   spaceRidesOptions,
-} from "../../utils/icon-utils.jsx";
+} from "../../utils/icon-options.jsx";
+import { STYLES } from "../../utils/config.jsx";
+
+// helper to get ticks for linear scales or domain for band scales
+function getScaleTicks(scale, count = 10) {
+  return typeof scale.ticks === "function"
+    ? scale.ticks(count)
+    : scale.domain();
+}
+
+// helper to center in each band
+function getOffset(scale) {
+  return typeof scale.bandwidth === "function" ? scale.bandwidth() / 2 : 0;
+}
 
 export const createLayers = (
   positions,
@@ -15,32 +28,59 @@ export const createLayers = (
   xScale,
   yScale
 ) => {
-  if (slide.chapter == 0)
-    return createSatCatLayers(positions, slide, hovered, onHover);
-  else if (slide.chapter == 1)
-    return createSatUseLayers(positions, slide, hovered, onHover);
-  else if (slide.chapter == 2)
-    return createSpaceRidesLayers(positions, slide, hovered, onHover);
+  switch (slide.chapter) {
+    case 0:
+      return createSatCatLayers(positions, slide, hovered, onHover, xScale);
+    case 1:
+      return createSatUseLayers(positions, slide, hovered, onHover, xScale);
+    case 2:
+      return createSpaceRidesLayers(positions, slide, hovered, onHover, xScale);
+    default:
+      return [];
+  }
 };
 
-export const createSatCatLayers = (positions, slide, hovered, onHover) => {
-  return [new IconLayer(satCatOptions(positions, slide, hovered, onHover))];
+const createSatCatLayers = (positions, slide, hovered, onHover, xScale) => {
+  let layers = [
+    new IconLayer(satCatOptions(positions, slide, hovered, onHover)),
+  ];
+  if (slide.type == "timeline") {
+    layers.push(makeGridLinesLayer(xScale));
+    layers.push(makeGridLabelsLayer(xScale));
+  }
+  return layers;
 };
 
-export const createSatUseLayers = (positions, slide, hovered, onHover) => {
-  return [new IconLayer(satUseOptions(positions, slide, hovered, onHover))];
+const createSatUseLayers = (positions, slide, hovered, onHover, xScale) => {
+  let layers = [
+    new IconLayer(satUseOptions(positions, slide, hovered, onHover)),
+  ];
+  if (slide.type == "timeline") {
+    layers.push(makeGridLinesLayer(xScale));
+    layers.push(makeGridLabelsLayer(xScale));
+  }
+  return layers;
 };
 
-export const createSpaceRidesLayers = (positions, slide, hovered, onHover) => {
-  return [new IconLayer(spaceRidesOptions(positions, slide, hovered, onHover))];
+const createSpaceRidesLayers = (positions, slide, hovered, onHover, xScale) => {
+  let layers = [
+    new IconLayer(spaceRidesOptions(positions, slide, hovered, onHover)),
+  ];
+  if (slide.type == "timeline") {
+    layers.push(makeGridLinesLayer(xScale));
+    layers.push(makeGridLabelsLayer(xScale));
+  }
+  return layers;
 };
 
-export const makeGridLinesLayer = (xScale, height, margin) => {
-  const ticks = xScale.ticks(10);
+export const makeGridLinesLayer = (xScale) => {
+  const ticks = getScaleTicks(xScale, 10);
+  const offset = getOffset(xScale);
+
   const data = ticks.map((t) => ({
     path: [
-      [xScale(t), margin.top],
-      [xScale(t), height - margin.bottom],
+      [xScale(t) + offset, STYLES.margin.top],
+      [xScale(t) + offset, STYLES.height - STYLES.margin.bottom],
     ],
   }));
 
@@ -57,10 +97,12 @@ export const makeGridLinesLayer = (xScale, height, margin) => {
   });
 };
 
-export const makeGridLabelsLayer = (xScale, margin) => {
-  const ticks = xScale.ticks(10);
+export const makeGridLabelsLayer = (xScale) => {
+  const ticks = getScaleTicks(xScale, 10);
+  const offset = getOffset(xScale);
+
   const data = ticks.map((t) => ({
-    position: [xScale(t), margin.top - 10],
+    position: [xScale(t) + offset, STYLES.margin.top - 10],
     text: `${t}`,
   }));
 

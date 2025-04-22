@@ -61,12 +61,13 @@ export default function DeckCanvasChart({ slide, data }) {
           }),
         ]}
         initialViewState={initialViewState}
-        controller={{ dragPan: true }}
+        controller={{ maxZoom: 0.5, minZoom: -15, dragPan: true }}
         layers={layers}
         style={{ backgroundColor: "#121213" }}
+        pickingRadius={20}
         getCursor={({ isDragging, isHovering }) => {
           if (isDragging) return "grabbing";
-          if (isHovering) return "url(/cursor-look.svg) 34 24, pointer";
+          // if (isHovering) return "url(/cursor-look.svg) 34 24, pointer";
           return "url(/cursor.svg) 48 17, auto";
         }}
       />
