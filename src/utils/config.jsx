@@ -1,10 +1,11 @@
-export const ICON_URL = import.meta.env.VITE_ICON_URL;
-
 export const DATA_URLS = {
-  0: import.meta.env.VITE_DATA_URL_CHAPTER0,
-  1: import.meta.env.VITE_DATA_URL_CHAPTER1,
-  2: import.meta.env.VITE_DATA_URL_CHAPTER2,
+  0: new URL(import.meta.env.VITE_DATA_URL_CHAPTER0, import.meta.url).href,
+  1: new URL(import.meta.env.VITE_DATA_URL_CHAPTER1, import.meta.url).href,
+  2: new URL(import.meta.env.VITE_DATA_URL_CHAPTER2, import.meta.url).href,
 };
+
+export const ICON_URL = new URL(import.meta.env.VITE_ICON_URL, import.meta.url)
+  .href;
 
 export const STYLES = {
   "width": 1000,
