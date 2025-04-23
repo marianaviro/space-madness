@@ -14,14 +14,6 @@ export const STYLES = {
 };
 
 export const ICON_MAPPING = {
-  "sat-comm-other": {
-    "x": 1,
-    "y": 1,
-    "width": 34,
-    "heigth": 26,
-    "anchorX": 34,
-    "anchorY": 26,
-  },
   "sat-comm": {
     "x": 37,
     "y": 1,
@@ -38,8 +30,16 @@ export const ICON_MAPPING = {
     "anchorX": 34,
     "anchorY": 26,
   },
+  "sat-comm-other": {
+    "x": 1,
+    "y": 1,
+    "width": 34,
+    "height": 26,
+    "anchorX": 34,
+    "anchorY": 26,
+  },
   "space-rider-private": {
-    "x": 159,
+    "x": 137,
     "y": 1,
     "width": 13,
     "height": 24,
@@ -47,7 +47,7 @@ export const ICON_MAPPING = {
     "anchorY": 24,
   },
   "space-rider-tourist": {
-    "x": 174,
+    "x": 152,
     "y": 1,
     "width": 13,
     "height": 24,
@@ -55,7 +55,7 @@ export const ICON_MAPPING = {
     "anchorY": 24,
   },
   "space-rider": {
-    "x": 189,
+    "x": 167,
     "y": 1,
     "width": 13,
     "height": 24,
@@ -65,17 +65,9 @@ export const ICON_MAPPING = {
   "starlink": {
     "x": 109,
     "y": 1,
-    "width": 24,
+    "width": 13,
     "height": 24,
-    "anchorX": 24,
-    "anchorY": 24,
-  },
-  "ride": {
-    "x": 137,
-    "y": 1,
-    "width": 20,
-    "height": 24,
-    "anchorX": 20,
+    "anchorX": 13,
     "anchorY": 24,
   },
 };
