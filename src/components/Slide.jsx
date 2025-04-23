@@ -3,7 +3,7 @@ import DeckCanvasChart from "./Deck-Canvas-Chart/DeckCanvasChart.jsx";
 
 export function Slide({ slide, data }) {
   return (
-    <div>
+    <div className="layout">
       <Text slide={slide} />
       <div className="content">
         {data ? (

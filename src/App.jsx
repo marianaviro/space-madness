@@ -27,7 +27,7 @@ function App() {
   }, [chapter, ops]);
 
   return (
-    <div className="layout">
+    <div>
       <NavButtons
         progress={progress}
         totalSteps={slidesContent.length}

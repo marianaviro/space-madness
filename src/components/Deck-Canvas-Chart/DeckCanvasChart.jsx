@@ -61,7 +61,7 @@ export default function DeckCanvasChart({ slide, data }) {
           }),
         ]}
         initialViewState={initialViewState}
-        controller={{ maxZoom: 0.5, minZoom: -15, dragPan: true }}
+        controller={{ maxZoom: 0.5, minZoom: -15, dragPan: false }}
         layers={layers}
         style={{ backgroundColor: "#121213" }}
         pickingRadius={20}

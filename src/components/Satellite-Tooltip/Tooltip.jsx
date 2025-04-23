@@ -11,7 +11,7 @@ function SatelliteTooltip({ x, y, text }) {
   return (
     <div
       className="tooltip-satellite"
-      style={{ left: `${x}px`, top: `${y}px` }}
+      // style={{ left: `${x + 500}px`, top: `${y}px` }}
     >
       {Object.entries(text).map(([key, value]) => (
         <div key={key}>

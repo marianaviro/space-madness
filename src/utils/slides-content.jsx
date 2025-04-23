@@ -9,9 +9,16 @@ export const slidesContent = [
     "type": "waffle",
     "styles": STYLES,
     "ops": {
+      "numCols": 20,
       "bins": 100,
     },
     "text": "Since Sputnik I, humanity has sent 63,108 satellites to space.",
+    "legend": [
+      {
+        "name": "100 satellites",
+        "icon": "/sat.svg",
+      },
+    ],
   },
   {
     "id": "satcat-decayed",
@@ -19,26 +26,24 @@ export const slidesContent = [
     "step": 1,
     "data": "/data/satcat.csv",
     "ops": {
-      "bins": 100,
-      "filter": "decayed",
-    },
-    "type": "waffle",
-    "styles": STYLES,
-    "text":
-      "A lot of them have either returned back to Earth (sometimes injuring people) or have dissolved into Earth's lower atmosphere.",
-  },
-  {
-    "id": "satcat-active",
-    "chapter": 0,
-    "step": 2,
-    "data": "/data/satcat.csv",
-    "ops": {
+      "numCols": 20,
       "bins": 100,
       "filter": "decayed",
     },
     "type": "timeline",
     "styles": STYLES,
-    "text": "As of April 2025, there are 30,080 satellites orbiting Earth.",
+    "text":
+      "A lot of them have either returned back to Earth (sometimes injuring people) or have dissolved into Earth's lower atmosphere.",
+    "legend": [
+      {
+        "name": "100 decayed satellites",
+        "icon": "/sat.svg",
+      },
+      {
+        "name": "100 active satellites",
+        "icon": "/sat.svg",
+      },
+    ],
   },
   {
     "id": "satuse-all",
@@ -49,6 +54,12 @@ export const slidesContent = [
     "styles": STYLES,
     "text":
       "The Union of Concerned Scientists has documented the use of 7,562 satellites.",
+    "legend": [
+      {
+        "name": "100 satellites",
+        "icon": "/sat.svg",
+      },
+    ],
   },
   {
     "id": "satuse-use",
@@ -61,6 +72,20 @@ export const slidesContent = [
     "type": "timeline",
     "styles": STYLES,
     "text": "To this date X,XXX have entirely or partly commercial purposes.",
+    "legend": [
+      {
+        "name": "100 non-commercial satellites",
+        "icon": "/sat.svg",
+      },
+      {
+        "name": "100 commercial satellites",
+        "icon": "/sat-comm.svg",
+      },
+      {
+        "name": "100 mixed use satellites",
+        "icon": "/sat-comm-other.svg",
+      },
+    ],
   },
   {
     "id": "satuse-starlink",
@@ -69,12 +94,22 @@ export const slidesContent = [
     "data": "/data/clean_sat.csv",
     "type": "waffle",
     "ops": {
-      "numCols": 70,
+      // "numCols": 70,
       "bins": 100,
       "filter": "starlink",
     },
     "styles": STYLES,
     "text": "These are all satellites Starlink has sent to space",
+    "legend": [
+      {
+        "name": "100 Starlink satellites",
+        "icon": "/starlink.svg",
+      },
+      {
+        "name": "100 non-Starlink satellites",
+        "icon": "/sat.svg",
+      },
+    ],
   },
   {
     "id": "space-rides-all",
@@ -101,6 +136,12 @@ export const slidesContent = [
     },
     "styles": STYLES,
     "text": "Hiiii. space-rides-all",
+    "legend": [
+      {
+        "name": "1 space rider",
+        "icon": "/space-rider.svg",
+      },
+    ],
   },
   {
     "id": "space-rides-timeline",
@@ -110,5 +151,19 @@ export const slidesContent = [
     "type": "timeline",
     "styles": STYLES,
     "text": "Hiiii. space-rides-all",
+    "legend": [
+      {
+        "name": "1 public official",
+        "icon": "/space-rider.svg",
+      },
+      {
+        "name": "1 private contractor",
+        "icon": "/space-rider-private.svg",
+      },
+      {
+        "name": "1 tourist",
+        "icon": "/space-rider-tourist.svg",
+      },
+    ],
   },
 ];

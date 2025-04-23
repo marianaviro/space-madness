@@ -1,16 +1,16 @@
-export const ICON_URL = "/assets/data/satellite-icon-atlas.png";
+export const ICON_URL = "/data/satellite-icon-atlas.png";
 
 export const DATA_URLS = [
-  "assets/data/satcat.csv",
-  "assets/data/clean_sat.csv",
-  "assets/data/rides-clean.csv",
+  "/data/satcat.csv",
+  "/data/clean_sat.csv",
+  "/data/rides-clean.csv",
 ];
 
 export const STYLES = {
-  "width": 2500,
-  "height": 3000,
+  "width": 800,
+  "height": 680,
   "iconSize": 34,
-  "margin": { top: 0, right: 0, bottom: 0, left: 0 },
+  "margin": { top: 50, right: 0, bottom: 50, left: 0 },
 };
 
 export const ICON_MAPPING = {

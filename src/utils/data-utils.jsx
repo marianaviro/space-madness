@@ -3,7 +3,7 @@ import * as d3 from "d3";
 import { DATA_URLS } from "./config.jsx";
 
 export const loadData = (chapter, ops, setData) => {
-  d3.csv("../../" + DATA_URLS[chapter], d3.autoType)
+  d3.csv(DATA_URLS[chapter], d3.autoType)
     .then((loadedData) => {
       console.log("Data reloaded:", loadedData);
       const data = processData(chapter, ops, loadedData);

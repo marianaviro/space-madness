@@ -7,7 +7,6 @@ export const prepareData = (slide, data) => {
   const positions = [];
 
   if (slide.type === "timeline") {
-    // … your existing timeline code unchanged …
     const years = Array.from(new Set(processedData.map((d) => d.year))).sort(
       d3.ascending
     );
@@ -32,15 +31,15 @@ export const prepareData = (slide, data) => {
 
   if (slide.type === "waffle") {
     let layoutData = processedData;
-    if (slide.groupBy) {
+    if (slide.ops.groupBy) {
       layoutData = [...processedData].sort((a, b) => {
-        if (a[slide.groupBy] < b[slide.groupBy]) return -1;
-        if (a[slide.groupBy] > b[slide.groupBy]) return 1;
+        if (a[slide.ops.groupBy] < b[slide.ops.groupBy]) return -1;
+        if (a[slide.ops.groupBy] > b[slide.ops.groupBy]) return 1;
         return 0;
       });
     }
     const numCols =
-      slide.numCols ||
+      slide.ops.numCols ||
       Math.floor(
         (STYLES.width - STYLES.margin.left - STYLES.margin.right) /
           (STYLES.iconSize + 4)
