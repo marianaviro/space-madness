@@ -8,6 +8,9 @@ export const slidesContent = [
     "data": "/data/satcat.csv",
     "type": "waffle",
     "styles": STYLES,
+    "ops": {
+      "bins": 100,
+    },
     "text": "Since Sputnik I, humanity has sent 63,108 satellites to space.",
   },
   {
@@ -15,7 +18,10 @@ export const slidesContent = [
     "chapter": 0,
     "step": 1,
     "data": "/data/satcat.csv",
-    "filter": "decayed",
+    "ops": {
+      "bins": 100,
+      "filter": "decayed",
+    },
     "type": "waffle",
     "styles": STYLES,
     "text":
@@ -26,7 +32,10 @@ export const slidesContent = [
     "chapter": 0,
     "step": 2,
     "data": "/data/satcat.csv",
-    "filter": "decayed",
+    "ops": {
+      "bins": 100,
+      "filter": "decayed",
+    },
     "type": "timeline",
     "styles": STYLES,
     "text": "As of April 2025, there are 30,080 satellites orbiting Earth.",
@@ -46,6 +55,9 @@ export const slidesContent = [
     "chapter": 1,
     "step": 1,
     "data": "/data/clean_sat.csv",
+    "ops": {
+      "bins": 100,
+    },
     "type": "timeline",
     "styles": STYLES,
     "text": "To this date X,XXX have entirely or partly commercial purposes.",
@@ -56,8 +68,11 @@ export const slidesContent = [
     "step": 2,
     "data": "/data/clean_sat.csv",
     "type": "waffle",
-    "numCols": 70,
-    "filter": "starlink",
+    "ops": {
+      "numCols": 70,
+      "bins": 100,
+      "filter": "starlink",
+    },
     "styles": STYLES,
     "text": "These are all satellites Starlink has sent to space",
   },
@@ -67,7 +82,10 @@ export const slidesContent = [
     "step": 0,
     "data": "/data/rides-clean.csv",
     "type": "waffle",
-    "numCols": 40,
+    "ops": {
+      "numCols": 40,
+      "bins": 100,
+    },
     "styles": STYLES,
     "text": "Hiiii. space-rides-all",
   },
@@ -77,7 +95,10 @@ export const slidesContent = [
     "step": 1,
     "data": "/data/rides-clean.csv",
     "type": "waffle",
-    "numCols": 40,
+    "ops": {
+      "numCols": 40,
+      "bins": 100,
+    },
     "styles": STYLES,
     "text": "Hiiii. space-rides-all",
   },

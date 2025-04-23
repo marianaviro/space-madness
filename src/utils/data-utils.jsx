@@ -2,11 +2,11 @@ import * as d3 from "d3";
 
 import { DATA_URLS } from "./config.jsx";
 
-export const loadData = (chapter, filter, setData) => {
+export const loadData = (chapter, ops, setData) => {
   d3.csv(DATA_URLS[chapter], d3.autoType)
     .then((loadedData) => {
       console.log("Data reloaded:", loadedData);
-      const data = processData(chapter, filter, loadedData);
+      const data = processData(chapter, ops, loadedData);
       setData(data);
     })
     .catch((error) => {
@@ -14,18 +14,18 @@ export const loadData = (chapter, filter, setData) => {
     });
 };
 
-export const processData = (chapter, filter, data) => {
+export const processData = (chapter, ops, data) => {
   // Ch 1: Satellites (SATCAT)
   if (chapter == 0) {
     let processed = data;
-    if (filter) {
-      if (filter == "decayed") {
+    if (ops.filter) {
+      if (ops.filter == "decayed") {
         processed = data.filter((d) => !d["DECAY_DATE"]);
         console.log("Filtered in: ", processed.length);
       }
     }
 
-    return processed.map((d, i) => {
+    processed = processed.map((d, i) => {
       let launch_date = new Date(d["LAUNCH_DATE"]);
       let decay_date = new Date(d["DECAY_DATE"]);
       return {
@@ -38,6 +38,32 @@ export const processData = (chapter, filter, data) => {
         year: launch_date.getFullYear(),
       };
     });
+    if (ops.bins) {
+      const binSize = typeof ops.bins === "number" ? ops.bins : 100;
+      const groupKey = ops.groupBy || "year";
+      const grouped = d3.group(processed, (d) => d[groupKey]);
+      const binned = [];
+
+      grouped.forEach((items, key) => {
+        for (let start = 0; start < items.length; start += binSize) {
+          const binItems = items.slice(start, start + binSize);
+          const binIndex = Math.floor(start / binSize);
+          binned.push({
+            id: `${key}-${binIndex}`,
+            count: binItems.length,
+            items: binItems,
+            // keep year for timeline layouts
+            year: groupKey === "year" ? key : binItems[0].year,
+            // dynamic property so waffle layouts can pick up grouping
+            [groupKey]: key,
+          });
+        }
+      });
+
+      processed = binned;
+    }
+
+    return processed;
   }
   // Ch 2: Active satellites by use (Union of Concerned Scientists)
   else if (chapter == 1) {

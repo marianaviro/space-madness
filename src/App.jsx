@@ -11,7 +11,7 @@ function App() {
 
   const slide = slidesContent[progress];
   const chapter = slide.chapter;
-  const filter = slide.filter;
+  const ops = slide.ops;
 
   const handleClick = (direction) =>
     setProgress((p) => {
@@ -23,8 +23,8 @@ function App() {
 
   // Reload data if chapter changes or there's a filter applied
   useEffect(() => {
-    loadData(chapter, filter, setData);
-  }, [chapter, filter]);
+    loadData(chapter, ops, setData);
+  }, [chapter, ops]);
 
   return (
     <div className="layout">

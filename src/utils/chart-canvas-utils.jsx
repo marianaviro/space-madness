@@ -2,10 +2,12 @@ import * as d3 from "d3";
 import { STYLES } from "./config.jsx";
 
 export const prepareData = (slide, data) => {
-  let xScale, yScale, positions;
-  let processedData = data;
+  let xScale, yScale;
+  const processedData = data;
+  const positions = [];
 
   if (slide.type === "timeline") {
+    // … your existing timeline code unchanged …
     const years = Array.from(new Set(processedData.map((d) => d.year))).sort(
       d3.ascending
     );
@@ -14,55 +16,46 @@ export const prepareData = (slide, data) => {
       .domain(d3.extent(years))
       .range([STYLES.margin.left, STYLES.width - STYLES.margin.right]);
 
-    // group by year, stagger vertically
     const grouped = d3.group(processedData, (d) => d.year);
     const ySpacing = STYLES.iconSize + 4;
-    positions = [];
 
-    for (const [year, satGroup] of grouped) {
+    grouped.forEach((entries, year) => {
       const xPos = xScale(year);
-      satGroup.forEach((d, i) => {
+      entries.forEach((d, i) => {
         const y = STYLES.margin.top + i * ySpacing;
-
-        //Remove this to show all satellites
-        if (y + STYLES.iconSize / 2 < STYLES.height - STYLES.margin.bottom) {
-          positions.push({ ...d, x: xPos, y });
-        }
-        //Uncomment this to constrain Y boundary
         positions.push({ ...d, x: xPos, y });
       });
-    }
+    });
+
     return { positions, x: xScale };
   }
 
   if (slide.type === "waffle") {
-    const numCols = slide.numCols || STYLES.width / 10;
-    const total = processedData.length;
-    const numRows = Math.ceil(total / numCols);
+    let layoutData = processedData;
+    if (slide.groupBy) {
+      layoutData = [...processedData].sort((a, b) => {
+        if (a[slide.groupBy] < b[slide.groupBy]) return -1;
+        if (a[slide.groupBy] > b[slide.groupBy]) return 1;
+        return 0;
+      });
+    }
+    const numCols =
+      slide.numCols ||
+      Math.floor(
+        (STYLES.width - STYLES.margin.left - STYLES.margin.right) /
+          (STYLES.iconSize + 4)
+      );
+    const xSpacing = STYLES.iconSize + 4;
+    const ySpacing = STYLES.iconSize + 4;
 
-    xScale = d3
-      .scaleBand()
-      .domain(d3.range(numCols))
-      .range([STYLES.margin.left, STYLES.width - STYLES.margin.right])
-      .padding(0.1);
-
-    yScale = d3
-      .scaleBand()
-      .domain(d3.range(numRows))
-      .range([STYLES.margin.top, STYLES.height - STYLES.margin.bottom])
-      .padding(0.1);
-
-    positions = processedData.map((d, i) => {
+    layoutData.forEach((d, i) => {
       const col = i % numCols;
       const row = Math.floor(i / numCols);
-      return {
-        ...d,
-        x: xScale(col) + xScale.bandwidth() / 2,
-        y: yScale(row) + yScale.bandwidth() / 2,
-      };
+      const x = STYLES.margin.left + col * xSpacing;
+      const y = STYLES.margin.top + row * ySpacing;
+      positions.push({ ...d, x, y });
     });
-
-    return { positions, x: xScale, y: yScale };
+    return { positions };
   }
   return { positions: [], x: xScale, y: yScale };
 };

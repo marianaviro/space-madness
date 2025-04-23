@@ -1,5 +1,6 @@
 .tooltip-satellite {
-  position: absolute;
+  position: fixed;
+  top: 100px;
   transform: translate(12px, 12px);
   width: 150px;
   min-width: max-content;

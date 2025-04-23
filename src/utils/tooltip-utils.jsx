@@ -1,8 +1,10 @@
 export const prepareTooltip = (slide, info) => {
+  console.log(info);
   if (slide.chapter == 0) {
     return {
       x: info.x,
       y: info.y,
+      items: info.object.items,
       text: {
         name: info.object.name,
         status: info.object.status == "D" ? "Decayed" : "Active",
@@ -14,6 +16,7 @@ export const prepareTooltip = (slide, info) => {
     return {
       x: info.x,
       y: info.y,
+      items: info.object.items,
       text: {
         name: info.object.name,
         country: info.object.country,
@@ -26,6 +29,7 @@ export const prepareTooltip = (slide, info) => {
     return {
       x: info.x,
       y: info.y,
+      items: info.object.items,
       text: {
         name: info.object.name,
         category: info.object.category,
