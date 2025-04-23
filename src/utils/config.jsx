@@ -1,9 +1,9 @@
-export const ICON_URL = "/data/satellite-icon-atlas.png";
+export const ICON_URL = "/assets/data/satellite-icon-atlas.png";
 
 export const DATA_URLS = [
-  "/data/satcat.csv",
-  "/data/clean_sat.csv",
-  "/data/rides-clean.csv",
+  "/assets/data/satcat.csv",
+  "/assets/data/clean_sat.csv",
+  "/assets/data/rides-clean.csv",
 ];
 
 export const STYLES = {
