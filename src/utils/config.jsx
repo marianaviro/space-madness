@@ -1,10 +1,10 @@
-export const ICON_URL = "/data/satellite-icon-atlas.png";
+export const ICON_URL = import.meta.env.VITE_ICON_URL;
 
-export const DATA_URLS = [
-  "/data/satcat.csv",
-  "/data/clean_sat.csv",
-  "/data/rides-clean.csv",
-];
+export const DATA_URLS = {
+  0: import.meta.env.VITE_DATA_URL_CHAPTER0,
+  1: import.meta.env.VITE_DATA_URL_CHAPTER1,
+  2: import.meta.env.VITE_DATA_URL_CHAPTER2,
+};
 
 export const STYLES = {
   "width": 1000,
