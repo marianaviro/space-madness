@@ -1,14 +1,6 @@
 {"frames": [
 
 {
-	"filename": "ride.svg",
-	"frame": {"x":137,"y":1,"w":24,"h":24},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":24,"h":24},
-	"sourceSize": {"w":24,"h":24}
-},
-{
 	"filename": "sat-comm-other.svg",
 	"frame": {"x":1,"y":1,"w":34,"h":26},
 	"rotated": false,
@@ -34,7 +26,7 @@
 },
 {
 	"filename": "space-rider-private.svg",
-	"frame": {"x":163,"y":1,"w":13,"h":24},
+	"frame": {"x":137,"y":1,"w":13,"h":24},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":13,"h":24},
@@ -42,7 +34,7 @@
 },
 {
 	"filename": "space-rider-tourist.svg",
-	"frame": {"x":178,"y":1,"w":13,"h":24},
+	"frame": {"x":152,"y":1,"w":13,"h":24},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":13,"h":24},
@@ -50,7 +42,7 @@
 },
 {
 	"filename": "space-rider.svg",
-	"frame": {"x":193,"y":1,"w":13,"h":24},
+	"frame": {"x":167,"y":1,"w":13,"h":24},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":13,"h":24},
@@ -69,8 +61,8 @@
 	"version": "1.0",
 	"image": "satellite-icon-atlas.png",
 	"format": "RGBA8888",
-	"size": {"w":207,"h":28},
+	"size": {"w":181,"h":28},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:96da56e34782d9a0dab4341bbba10ef7:c101bd7c21f922fd6c23337b6840f947:2e5b5d7e020f229cab81e1174f4eacfe$"
+	"smartupdate": "$TexturePacker:SmartUpdate:8d9c607a2a6ba8a097935afab9d0f8a2:1eb2ea50997a04bd7f4f49d6058d8950:2e5b5d7e020f229cab81e1174f4eacfe$"
 }
 }
