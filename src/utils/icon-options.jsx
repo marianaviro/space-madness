@@ -48,8 +48,10 @@ export const satUseOptions = (positions, slide, hovered, onHover) => {
         return "satellite";
       } else if (slide.step == 1) {
         if (d.use == "Commercial") return "sat-comm";
-        else if (d.use.includes("Commercial")) return "sat-comm-other";
-        else return "satellite";
+        else if (d.use.includes("Commercial")) {
+          console.log(d.use);
+          return "sat-comm-other";
+        } else return "satellite";
       } else if (slide.step == 2) {
         if (d.name.includes("Starlink")) return "starlink";
         else return "satellite";
@@ -85,7 +87,7 @@ export const spaceRidesOptions = (positions, slide, hovered, onHover) => {
     getIcon: (d) => {
       if (slide.step == 0) {
         return "space-rider";
-      } else if (slide.step == 1) {
+      } else if (slide.step == 1 || slide.step == 2) {
         if (d.category.includes("P")) {
           if (d.category == "PT") return "space-rider-tourist";
           else return "space-rider-private";
