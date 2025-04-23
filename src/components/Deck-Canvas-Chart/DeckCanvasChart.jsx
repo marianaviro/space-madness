@@ -36,7 +36,7 @@ export default function DeckCanvasChart({ slide, data }) {
   // orthographic camera
   const [initialViewState, setInitialViewState] = useState({
     target: [STYLES.width / 2, STYLES.height / 2, 0],
-    zoom: 0,
+    zoom: -0.5,
   });
 
   return (
@@ -61,7 +61,7 @@ export default function DeckCanvasChart({ slide, data }) {
           }),
         ]}
         initialViewState={initialViewState}
-        controller={{ maxZoom: 0.5, minZoom: -15, dragPan: false }}
+        controller={{ maxZoom: 0.5, minZoom: -15, dragPan: true }}
         layers={layers}
         style={{ backgroundColor: "#121213" }}
         pickingRadius={20}

@@ -1,5 +1,4 @@
 export const prepareTooltip = (slide, info) => {
-  console.log(info);
   if (slide.chapter == 0) {
     return {
       x: info.x,

@@ -11,13 +11,29 @@ export const satCatOptions = (positions, slide, hovered, onHover) => {
     iconAtlas: ICON_URL,
     iconMapping: ICON_MAPPING,
     getIcon: (d) => {
-      return "satellite";
+      if (slide.step == 0) {
+        return "satellite";
+      } else if (slide.step == 2) {
+        return "ride";
+      } else if (slide.step == 1) {
+        if (d.status == "D") return "decayed";
+        else return "satellite";
+      } else {
+        return "satellite";
+      }
     },
-    sizeScale: 0.5,
-    getSize: () => STYLES.iconSize,
+    transitions: {
+      dataChanged: {
+        type: "spring",
+        stiffness: 0.01,
+        damping: 0.15,
+      },
+    },
 
-    // getPosition: (d) => [d.x, d.y + 30],
-    getPosition: (d) => [d.x, d.y],
+    getSize: () =>
+      slide.ops?.iconSize ? slide.ops?.iconSize : STYLES.iconSize,
+
+    getPosition: (d) => [d.x, d.y + 30],
 
     getColor: (d) => {
       if (!hovered) {
@@ -49,7 +65,6 @@ export const satUseOptions = (positions, slide, hovered, onHover) => {
       } else if (slide.step == 1) {
         if (d.use == "Commercial") return "sat-comm";
         else if (d.use.includes("Commercial")) {
-          console.log(d.use);
           return "sat-comm-other";
         } else return "satellite";
       } else if (slide.step == 2) {
@@ -57,8 +72,11 @@ export const satUseOptions = (positions, slide, hovered, onHover) => {
         else return "satellite";
       }
     },
-    sizeScale: 0.8,
-    getSize: () => STYLES.iconSize,
+    sizeScale: 1,
+    transitions: {
+      getIcon: 1000,
+    },
+    getSize: () => (slide.ops?.iconSize ? slide.ops.iconSize : STYLES.iconSize),
 
     getPosition: (d) => [d.x, d.y + 30],
 
@@ -66,7 +84,7 @@ export const satUseOptions = (positions, slide, hovered, onHover) => {
       if (!hovered) {
         return [200, 200, 200, 255];
       }
-      return d.id === hovered.id ? [255, 140, 0, 255] : [200, 200, 200, 25];
+      return d.id === hovered.id ? [255, 140, 0, 255] : [200, 200, 200, 180];
     },
     updateTriggers: {
       getColor: [hovered],
@@ -98,7 +116,10 @@ export const spaceRidesOptions = (positions, slide, hovered, onHover) => {
         return "space-rider";
       }
     },
-    sizeScale: 0.8,
+    sizeScale: 1,
+    transitions: {
+      getIcon: 1000,
+    },
     getSize: () => STYLES.iconSize,
 
     getPosition: (d) => [d.x, d.y + 30],

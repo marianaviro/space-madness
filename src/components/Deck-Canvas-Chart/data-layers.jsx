@@ -88,7 +88,7 @@ export const makeGridLinesLayer = (xScale) => {
     id: "grid-lines",
     data,
     getPath: (d) => d.path,
-    getColor: [255, 255, 255],
+    getColor: [255, 255, 255, 50],
     getWidth: 1,
     getDashArray: [4, 8],
     dashJustified: true,

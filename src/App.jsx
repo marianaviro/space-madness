@@ -24,7 +24,7 @@ function App() {
   // Reload data if chapter changes or there's a filter applied
   useEffect(() => {
     loadData(chapter, ops, setData);
-  }, [chapter, ops]);
+  }, [chapter, ops, progress]);
 
   return (
     <div>

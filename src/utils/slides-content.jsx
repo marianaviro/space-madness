@@ -1,5 +1,11 @@
 import { STYLES } from "./config.jsx";
 
+const GREEN = "#C1F087";
+const ORANGE = "#FF5C21";
+const PINK = "#E043FF";
+const WHITE = "#ffffff";
+const BLUE = "#5DFFDF";
+
 export const slidesContent = [
   {
     "id": "satcat-all",
@@ -7,15 +13,23 @@ export const slidesContent = [
     "step": 0,
     "data": "/data/satcat.csv",
     "type": "waffle",
+    "subtype": "number",
     "styles": STYLES,
     "ops": {
-      "numCols": 20,
+      "numCols": 30,
       "bins": 100,
     },
-    "text": "Since Sputnik I, humanity has sent 63,108 satellites to space.",
+    "totals": [
+      {
+        "numItems": "63,108",
+        "itemType": "Satellites sent to space",
+        "color": GREEN,
+      },
+    ],
+    "text": "Since Sputnik I, we have sent a ton of stuff to space. ",
     "legend": [
       {
-        "name": "100 satellites",
+        "name": "100",
         "icon": "/sat.svg",
       },
     ],
@@ -26,21 +40,91 @@ export const slidesContent = [
     "step": 1,
     "data": "/data/satcat.csv",
     "ops": {
-      "numCols": 20,
+      "numCols": 30,
       "bins": 100,
-      "filter": "decayed",
+      "groupBy": "status",
     },
-    "type": "timeline",
+    "type": "waffle",
+    "subtype": "number",
     "styles": STYLES,
-    "text":
-      "A lot of them have either returned back to Earth (sometimes injuring people) or have dissolved into Earth's lower atmosphere.",
-    "legend": [
+    "totals": [
       {
-        "name": "100 decayed satellites",
-        "icon": "/sat.svg",
+        "numItems": "33,386",
+        "itemType": "Decayed satellites",
+        "color": ORANGE,
       },
       {
-        "name": "100 active satellites",
+        "numItems": "30,080",
+        "itemType": "Active satellites",
+        "color": GREEN,
+      },
+    ],
+    "text":
+      "A lot of them have either returned back to Earth (sometimes injuring people) or have dissolved into Earth's lower atmosphere. A whole other lot is still there.",
+    "legend": [
+      {
+        "name": "100",
+        "icon": "/decayed.svg",
+      },
+      {
+        "name": "100",
+        "icon": "/sat.svg",
+      },
+    ],
+  },
+  {
+    "id": "satcat-tonnes",
+    "chapter": 0,
+    "step": 2,
+    "data": "/data/satcat.csv",
+    "type": "waffle",
+    "subtype": "number",
+    "styles": STYLES,
+    "ops": {
+      "numCols": 30,
+      "bins": 100,
+    },
+    "totals": [
+      {
+        "numItems": "13,500",
+        "itemType": "Tonnes of space objects",
+        "color": ORANGE,
+      },
+    ],
+    "text":
+      "And we're still not sure what's the environmental impact of all that, but just the amount of stuff is dire.",
+    "legend": [
+      {
+        "name": "10 tonnes",
+        "icon": "/ride.svg",
+      },
+    ],
+  },
+  {
+    "id": "satcat-timeline",
+    "chapter": 0,
+    "step": 3,
+    "data": "/data/satcat.csv",
+    "type": "timeline",
+    "subtype": "number",
+    "styles": STYLES,
+    "ops": {
+      "filter": "decay",
+      "numCols": 30,
+      "bins": 100,
+    },
+    "totals": [
+      {
+        "numItems": "30,080",
+        "itemType": "Active satellites",
+        "color": GREEN,
+      },
+    ],
+    "text":
+      "These are all the active satellites by date of launch, including smaller pieces of larger satellites",
+    "legend": [
+      {
+        "name": "100 satellites",
         "icon": "/sat.svg",
       },
     ],
@@ -52,8 +136,18 @@ export const slidesContent = [
     "data": "/data/clean_sat.csv",
     "type": "timeline",
     "styles": STYLES,
+    "ops": {
+      "bins": 100,
+    },
+    "totals": [
+      {
+        "numItems": "7,562",
+        "itemType": "Tracked satellites",
+        "color": GREEN,
+      },
+    ],
     "text":
-      "The Union of Concerned Scientists has documented the use of 7,562 satellites.",
+      "The Union of Concerned Scientists has documented the use of the larger, standalone satellites.",
     "legend": [
       {
         "name": "100 satellites",
@@ -68,22 +162,41 @@ export const slidesContent = [
     "data": "/data/clean_sat.csv",
     "ops": {
       "bins": 100,
+      "numCols": 100,
+      "iconSize": 12,
     },
-    "type": "timeline",
+    "type": "waffle",
     "styles": STYLES,
+    "totals": [
+      {
+        "numItems": "1,291",
+        "itemType": "Non-commercial satellites",
+        "color": GREEN,
+      },
+      {
+        "numItems": "188",
+        "itemType": "Mixed use satellites",
+        "color": WHITE,
+      },
+      {
+        "numItems": "6,083",
+        "itemType": "Commercial satellites",
+        "color": PINK,
+      },
+    ],
     "text": "To this date X,XXX have entirely or partly commercial purposes.",
     "legend": [
       {
-        "name": "100 non-commercial satellites",
+        "name": "100",
         "icon": "/sat.svg",
       },
       {
-        "name": "100 commercial satellites",
-        "icon": "/sat-comm.svg",
+        "name": "100",
+        "icon": "/sat-comm-other.svg",
       },
       {
-        "name": "100 mixed use satellites",
-        "icon": "/sat-comm-other.svg",
+        "name": "100",
+        "icon": "/sat-comm.svg",
       },
     ],
   },
@@ -94,8 +207,9 @@ export const slidesContent = [
     "data": "/data/clean_sat.csv",
     "type": "waffle",
     "ops": {
-      // "numCols": 70,
+      "numCols": 100,
       "bins": 100,
+      "iconSize": 12,
       "filter": "starlink",
     },
     "styles": STYLES,
@@ -122,7 +236,20 @@ export const slidesContent = [
       "bins": 100,
     },
     "styles": STYLES,
-    "text": "Hiiii. space-rides-all",
+    "text": "We have also sent people to space.",
+    "totals": [
+      {
+        "numItems": "1,536",
+        "itemType": "Space riders",
+        "color": BLUE,
+      },
+    ],
+    "legend": [
+      {
+        "name": "1 space rider",
+        "icon": "/space-rider.svg",
+      },
+    ],
   },
   {
     "id": "space-rides-category",
@@ -135,7 +262,29 @@ export const slidesContent = [
       "bins": 100,
     },
     "styles": STYLES,
-    "text": "Hiiii. space-rides-all",
+    "number": {
+      "numItems": 1,
+      "itemType": "space rider",
+    },
+
+    "totals": [
+      {
+        "numItems": "1,354",
+        "itemType": "Public workers",
+        "color": BLUE,
+      },
+      {
+        "numItems": "85",
+        "itemType": "Private travelers",
+        "color": PINK,
+      },
+      {
+        "numItems": "97",
+        "itemType": "Tourists",
+        "color": ORANGE,
+      },
+    ],
+    "text": "Not all space travelers are sent to space for public endeavors.",
     "legend": [
       {
         "name": "1 space rider",

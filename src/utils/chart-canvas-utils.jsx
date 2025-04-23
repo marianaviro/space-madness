@@ -4,6 +4,7 @@ import { STYLES } from "./config.jsx";
 export const prepareData = (slide, data) => {
   let xScale, yScale;
   const processedData = data;
+
   const positions = [];
 
   if (slide.type === "timeline") {
@@ -27,12 +28,11 @@ export const prepareData = (slide, data) => {
     });
 
     return { positions, x: xScale };
-  }
-
-  if (slide.type === "waffle") {
+  } else if (slide.type === "waffle") {
     let layoutData = processedData;
     if (slide.ops.groupBy) {
       layoutData = [...processedData].sort((a, b) => {
+        if (!a[slide.ops.groupBy] && !b[slide.ops.groupBy]) return 0;
         if (a[slide.ops.groupBy] < b[slide.ops.groupBy]) return -1;
         if (a[slide.ops.groupBy] > b[slide.ops.groupBy]) return 1;
         return 0;
@@ -46,6 +46,9 @@ export const prepareData = (slide, data) => {
       );
     const xSpacing = STYLES.iconSize + 4;
     const ySpacing = STYLES.iconSize + 4;
+    if (slide.id == "satcat-tonnes") {
+      layoutData = layoutData.slice(0, 1350);
+    }
 
     layoutData.forEach((d, i) => {
       const col = i % numCols;
