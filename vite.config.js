@@ -6,12 +6,4 @@ export default defineConfig({
   plugins: [react()],
   // base: "/",
   base: "/space-madness",
-  build: {
-    // Ensure all “assetFileNames” (including public/) get placed into /assets
-    rollupOptions: {
-      output: {
-        assetFileNames: "assets/[name][extname]",
-      },
-    },
-  },
 });
