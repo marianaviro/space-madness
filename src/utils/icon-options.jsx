@@ -30,8 +30,7 @@ export const satCatOptions = (positions, slide, hovered, onHover) => {
       },
     },
 
-    getSize: () =>
-      slide.ops?.iconSize ? slide.ops?.iconSize : STYLES.iconSize,
+    getSize: () => STYLES.iconSize,
 
     getPosition: (d) => [d.x, d.y + 30],
 
